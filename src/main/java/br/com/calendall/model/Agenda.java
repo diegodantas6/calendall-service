@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "agenda")
@@ -26,12 +25,10 @@ public class Agenda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Data e obrigatorio")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_agenda")
 	private Date data;
 
-	@NotNull(message="Situacao e obrigatorio")
 	@Column(name = "situacao")
 	private String situacao;
 

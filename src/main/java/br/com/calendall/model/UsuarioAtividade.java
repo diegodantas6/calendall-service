@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "usuario_atividade")
@@ -23,11 +22,9 @@ public class UsuarioAtividade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Tempo e obrigatorio")
 	@Column(name = "tempo")
 	private Integer tempo;
 
-	@NotNull(message="Preco e obrigatorio")
 	@Column(name = "preço")
 	private Double preço;
 

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "dados_pro")
@@ -20,27 +19,21 @@ public class DadosPro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Tipo de pagamento e obrigatorio")
 	@Column(name = "tipo_pagamento")
 	private String tipoPagamento;
 
-	@NotNull(message="Tipo de atendimento e obrigatorio")
 	@Column(name = "tipo_atendimento")
 	private String tipoAtendimento;
 	
-	@NotNull(message="Tempo entre agendas e obrigatorio")
 	@Column(name = "tempo_entre_agendas")
 	private Integer tempoEntreAgendas;
 
-	@NotNull(message="CEP e obrigatorio")
 	@Column(name = "cep")
 	private String cep;
 
-	@NotNull(message="Numero e obrigatorio")
 	@Column(name = "numero")
 	private Integer numero;
 
-	@NotNull(message="Complemento e obrigatorio")
 	@Column(name = "complemento")
 	private String complemento;
 

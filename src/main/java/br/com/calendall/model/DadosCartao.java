@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "dados_cartao")
@@ -23,31 +22,24 @@ public class DadosCartao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Numero e obrigatorio")
 	@Column(name = "numero")
 	private String numero;
 
-	@NotNull(message="CVV e obrigatorio")
 	@Column(name = "cvv")
 	private String cvv;
 
-	@NotNull(message="Mes e obrigatorio")
 	@Column(name = "mes")
 	private Integer mes;
 
-	@NotNull(message="Ano e obrigatorio")
 	@Column(name = "ano")
 	private Integer ano;
 
-	@NotNull(message="Nome e obrigatorio")
 	@Column(name = "nome")
 	private String nome;
 
-	@NotNull(message="Situacao e obrigatorio")
 	@Column(name = "situacao")
 	private String situacao;
 
-	@NotNull(message="Bandeira e obrigatorio")
 	@Column(name = "bandeira")
 	private Integer bandeira;
 

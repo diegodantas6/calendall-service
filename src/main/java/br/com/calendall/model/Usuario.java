@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @NamedQueries({
@@ -28,33 +26,18 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Login e obrigatorio")
-	@Size(
-	    min = 6,
-	    max = 20,
-	    message = "O login deve conter entre {min} e {max} caracteres"
-    )
 	@Column(name = "login")
 	private String login;
 
-	@NotNull(message="Senha e obrigatorio")
-	@Size(
-		    min = 6,
-		    max = 20,
-		    message = "A senha deve conter entre {min} e {max} caracteres"
-	    )
 	@Column(name = "senha")
 	private String senha;
 
-	@NotNull(message="Tipo e obrigatorio")
 	@Column(name = "tipo")
 	private String tipo;
 
-	@NotNull(message="Nome e obrigatorio")
 	@Column(name = "nome")
 	private String nome;
 
-	@NotNull(message="Situacao e obrigatorio")
 	@Column(name = "situacao")
 	private String situacao;
 

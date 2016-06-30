@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "folga")
@@ -26,7 +25,6 @@ public class Folga implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message="Data e obrigatorio")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_folga")
 	private Date dataFolga;
