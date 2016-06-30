@@ -2,31 +2,24 @@ package br.com.calendall.dto.ret;
 
 import java.util.List;
 
-public class CadastroUsuarioRET {
+public class CadastroUsuarioRET extends RetornoRET {
 
 	private Long id;
-	private List<ErroRET> erros;
-
+	
 	public Long getId() {
 		return id;
-	}
-
-	public List<ErroRET> getErros() {
-		return erros;
-	}
-	
-	public CadastroUsuarioRET() {
-		super();
 	}
 
 	public CadastroUsuarioRET(Long id) {
 		super();
 		this.id = id;
 	}
+	
+	public CadastroUsuarioRET(List<ErroRET> erros) {
+		super(erros);
+	}
 
-	public CadastroUsuarioRET(Long id, List<ErroRET> erros) {
-		super();
-		this.id = id;
-		this.erros = erros;
+	public CadastroUsuarioRET(Exception e) {
+		super(e);
 	}
 }

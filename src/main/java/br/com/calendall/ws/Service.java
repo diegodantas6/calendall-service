@@ -13,6 +13,7 @@ import br.com.calendall.dto.AlterarSenhaDTO;
 import br.com.calendall.dto.CadastroUsuarioDTO;
 import br.com.calendall.dto.LoginDTO;
 import br.com.calendall.dto.ret.CadastroUsuarioRET;
+import br.com.calendall.dto.ret.RetornoRET;
 
 @Stateless
 @Path("service")
@@ -42,7 +43,7 @@ public class Service {
 	@Path("/alterar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean alterarSenha(AlterarSenhaDTO dto) {
+	public RetornoRET alterarSenha(AlterarSenhaDTO dto) {
 		return usuarioBusiness.alterarSenha(dto);
 	}
 

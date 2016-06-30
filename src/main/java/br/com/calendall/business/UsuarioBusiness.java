@@ -13,6 +13,7 @@ import br.com.calendall.dto.CadastroUsuarioDTO;
 import br.com.calendall.dto.LoginDTO;
 import br.com.calendall.dto.ret.CadastroUsuarioRET;
 import br.com.calendall.dto.ret.ErroRET;
+import br.com.calendall.dto.ret.RetornoRET;
 import br.com.calendall.enums.SituacaoUsuario;
 import br.com.calendall.model.Usuario;
 import br.com.calendall.utils.BeanValidator;
@@ -44,41 +45,47 @@ public class UsuarioBusiness {
 		}
 	}
 	
-	public boolean alterarSenha(AlterarSenhaDTO dto) {
+	public RetornoRET alterarSenha(AlterarSenhaDTO dto) {
 		try {
-			Usuario usuario = entityManager.find(Usuario.class, dto.getId());
+			List<ErroRET> erros = beanValidator.validar(dto);
 			
-			usuario.setSenha(dto.getSenha());
-			
-			entityManager.merge(usuario);
-			
-			return true;
+			if (erros.size() > 0) {
+				return new RetornoRET(erros);
+			} else {
+				Usuario usuario = entityManager.find(Usuario.class, dto.getId());
+				
+				usuario.setSenha(dto.getSenha());
+				
+				entityManager.merge(usuario);
+				
+				return new RetornoRET();
+			}
 		} catch (Exception e) {
-			return false;
+			return new RetornoRET(e);
 		}
 	}
 	
 	public CadastroUsuarioRET cadastroUsuario(CadastroUsuarioDTO dto) {
 		try {
-			Usuario usuario = new Usuario();
-			
-			usuario.setNome(dto.getNome());
-			usuario.setSenha(dto.getSenha());
-			usuario.setLogin(dto.getLogin());
-			usuario.setTipo(dto.getTipo());
-			usuario.setSituacao(SituacaoUsuario.ATIVO.getSittuacao());
-			
-			List<ErroRET> erros = beanValidator.validar(usuario);
+			List<ErroRET> erros = beanValidator.validar(dto);
 			
 			if (erros.size() > 0) {
-				return new CadastroUsuarioRET(0L, erros);
+				return new CadastroUsuarioRET(erros);
 			} else {
+				Usuario usuario = new Usuario();
+				
+				usuario.setNome(dto.getNome());
+				usuario.setSenha(dto.getSenha());
+				usuario.setLogin(dto.getLogin());
+				usuario.setTipo(dto.getTipo());
+				usuario.setSituacao(SituacaoUsuario.ATIVO.getSittuacao());
+
 				entityManager.persist(usuario);
 				
 				return new CadastroUsuarioRET(usuario.getId());
 			}
 		} catch (Exception e) {
-			return new CadastroUsuarioRET(0L);
+			return new CadastroUsuarioRET(e);
 		}
 	}
 }
