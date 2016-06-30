@@ -1,4 +1,18 @@
 -- -----------------------------------------------------
+-- Table dados_pro
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS dados_pro (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  tipo_pagamento CHAR(1) NOT NULL comment 'B = boleto / C = cartao',
+  tipo_atendimento CHAR(1) NOT NULL comment 'R = residencia / L = local proprio / A = ambos',
+  tempo_entre_agendas INT NOT NULL,
+  cep VARCHAR(8) NOT NULL,
+  numero INT NOT NULL,
+  complemento VARCHAR(60) NOT NULL,
+  PRIMARY KEY (id))
+;
+
+-- -----------------------------------------------------
 -- Table usuario
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuario (
@@ -12,47 +26,17 @@ CREATE TABLE IF NOT EXISTS usuario (
   celular VARCHAR(11) NULL,
   email VARCHAR(60) NULL,
   situacao CHAR(1) NOT NULL comment 'A = ativo / B = bloqueado',
+  dados_pro_id BIGINT NULL,
+  INDEX fk_usuario_dados_pro_idx (dados_pro_id ASC),
   PRIMARY KEY (id),
+  CONSTRAINT fk_usuario_dados_pro
+    FOREIGN KEY (dados_pro_id)
+	REFERENCES dados_pro (id)
+	ON DELETE NO ACTION
+	ON UPDATE NO ACTION,
   UNIQUE INDEX login_UNIQUE (login ASC),
   UNIQUE INDEX cpf_UNIQUE (cpf ASC))
 ;
-
--- -----------------------------------------------------
--- Table usuario_pro
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS usuario_pro (
-  id BIGINT NOT NULL AUTO_INCREMENT,
-  tipo_pagamento CHAR(1) NOT NULL comment 'B = boleto / C = cartao',
-  tipo_atendimento CHAR(1) NOT NULL comment 'R = residencia / L = local proprio / A = ambos',
-  tempo_entre_agendas INT NOT NULL,
-  usuario_id BIGINT NOT NULL,
-  PRIMARY KEY (id),
-  INDEX fk_usuario_idx (usuario_id ASC),
-  CONSTRAINT fk_usuario
-    FOREIGN KEY (usuario_id)
-    REFERENCES usuario (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-
--- -----------------------------------------------------
--- Table endereco
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS endereco (
-  id BIGINT NOT NULL AUTO_INCREMENT,
-  cep VARCHAR(8) NOT NULL,
-  numero INT NOT NULL,
-  complemento VARCHAR(60) NOT NULL,
-  usuario_id BIGINT NOT NULL,
-  PRIMARY KEY (id),
-  INDEX fk_endereco_usuario_idx (usuario_id ASC),
-  CONSTRAINT fk_endereco_usuario
-    FOREIGN KEY (usuario_id)
-    REFERENCES usuario (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-;
-
 
 -- -----------------------------------------------------
 -- Table atividade
@@ -63,14 +47,13 @@ CREATE TABLE IF NOT EXISTS atividade (
   PRIMARY KEY (id))
 ;
 
-
 -- -----------------------------------------------------
 -- Table usuario_atividade
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuario_atividade (
   id BIGINT NOT NULL AUTO_INCREMENT,
   tempo INT NOT NULL,
-  preÃ§o DECIMAL(6,2) NOT NULL,
+  preço DECIMAL(6,2) NOT NULL,
   usuario_id BIGINT NOT NULL,
   atividade_id BIGINT NOT NULL,
   INDEX fk_usuario_atividade_usuario_idx (usuario_id ASC),
@@ -110,7 +93,6 @@ CREATE TABLE IF NOT EXISTS dados_cartao (
     ON UPDATE NO ACTION)
 ;
 
-
 -- -----------------------------------------------------
 -- Table agenda
 -- -----------------------------------------------------
@@ -143,11 +125,10 @@ CREATE TABLE IF NOT EXISTS agenda (
     ON UPDATE NO ACTION)
 ;
 
-
 -- -----------------------------------------------------
--- Table espediente
+-- Table expediente
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS espediente (
+CREATE TABLE IF NOT EXISTS expediente (
   id BIGINT NOT NULL AUTO_INCREMENT,
   dia_semana INT NOT NULL,
   hora_inicio TIME NOT NULL,
@@ -162,14 +143,13 @@ CREATE TABLE IF NOT EXISTS espediente (
     ON UPDATE NO ACTION)
 ;
 
-
 -- -----------------------------------------------------
 -- Table folga
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS folga (
   id BIGINT NOT NULL AUTO_INCREMENT,
   data_folga DATE NOT NULL,
-  descricao VARCHAR(65) NULL,
+  descricao VARCHAR(60) NULL,
   usuario_id BIGINT NOT NULL,
   PRIMARY KEY (id),
   INDEX fk_folga_usuario_idx (usuario_id ASC),
@@ -179,7 +159,6 @@ CREATE TABLE IF NOT EXISTS folga (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
-
 
 -- -----------------------------------------------------
 -- Table amizade
