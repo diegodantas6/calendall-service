@@ -12,6 +12,7 @@ import br.com.calendall.business.UsuarioBusiness;
 import br.com.calendall.dto.AlterarSenhaDTO;
 import br.com.calendall.dto.CadastroUsuarioDTO;
 import br.com.calendall.dto.LoginDTO;
+import br.com.calendall.dto.RecuperarSenhaDTO;
 import br.com.calendall.dto.ret.CadastroUsuarioRET;
 import br.com.calendall.dto.ret.RetornoRET;
 
@@ -30,13 +31,12 @@ public class Service {
 		return usuarioBusiness.login(dto);
 	}
 
-	// TODO preciso dos dados de email para fazer esse servico
 	@POST
 	@Path("/recuperar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean recuperarSenha(LoginDTO dto) {
-		return usuarioBusiness.login(dto);
+	public boolean recuperarSenha(RecuperarSenhaDTO dto) {
+		return usuarioBusiness.recuperarSenha(dto);
 	}
 
 	@POST

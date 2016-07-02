@@ -16,7 +16,9 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "login", query = "select u from Usuario u where u.login = :login and u.senha = :senha and u.situacao = 'A'") })
+	@NamedQuery(name = "login", query = "select u from Usuario u where u.login = :login and u.senha = :senha and u.situacao = 'A'"),
+	@NamedQuery(name = "recuperar_senha", query = "select u from Usuario u where u.login = :login and u.situacao = 'A'")
+})
 @Table(name = "usuario")
 public class Usuario implements Serializable {
 
