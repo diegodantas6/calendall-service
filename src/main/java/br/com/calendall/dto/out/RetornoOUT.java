@@ -1,32 +1,32 @@
-package br.com.calendall.dto.ret;
+package br.com.calendall.dto.out;
 
 import java.util.List;
 
-public class RetornoRET {
+public class RetornoOUT {
 
 	private boolean ok;
-	private List<ErroRET> erros;
+	private List<ErroOUT> erros;
 
 	public boolean isOk() {
 		return ok;
 	}
 
-	public List<ErroRET> getErros() {
+	public List<ErroOUT> getErros() {
 		return erros;
 	}
 
-	public RetornoRET() {
+	public RetornoOUT() {
 		super();
 		this.ok = true;
 	}
 
-	public RetornoRET(List<ErroRET> erros) {
+	public RetornoOUT(List<ErroOUT> erros) {
 		super();
 		this.ok = false;
 		this.erros = erros;
 	}
 
-	public RetornoRET(Exception e) {
+	public RetornoOUT(Exception e) {
 		super();
 		this.ok = false;
 	}

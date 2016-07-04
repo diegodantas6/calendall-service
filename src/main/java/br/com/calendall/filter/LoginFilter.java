@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import br.com.calendall.business.UsuarioBusiness;
-import br.com.calendall.dto.LoginDTO;
+import br.com.calendall.dto.in.LoginIN;
 
 @Provider
 public class LoginFilter implements ContainerRequestFilter {
@@ -35,7 +35,7 @@ public class LoginFilter implements ContainerRequestFilter {
 			String login = requestContext.getHeaderString("user");
 			String senha = requestContext.getHeaderString("pass");
 
-			LoginDTO dto = new LoginDTO(login, senha);
+			LoginIN dto = new LoginIN(login, senha);
 
 			if (!(usuarioBusiness.login(dto))) {
 				requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)

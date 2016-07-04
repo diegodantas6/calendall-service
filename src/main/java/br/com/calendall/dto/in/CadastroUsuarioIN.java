@@ -1,9 +1,9 @@
-package br.com.calendall.dto;
+package br.com.calendall.dto.in;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class CadastroUsuarioDTO {
+public class CadastroUsuarioIN {
 
 	@NotNull(message="Nome deve ser informado")
 	private String nome;

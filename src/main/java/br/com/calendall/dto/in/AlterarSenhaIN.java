@@ -1,9 +1,9 @@
-package br.com.calendall.dto;
+package br.com.calendall.dto.in;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AlterarSenhaDTO {
+public class AlterarSenhaIN {
 
 	@NotNull(message="informe o id")
 	private Long id;

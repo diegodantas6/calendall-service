@@ -10,23 +10,23 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import br.com.calendall.dto.ret.ErroRET;
+import br.com.calendall.dto.out.ErroOUT;
 
 @Stateless
 public class BeanValidator {
 
-	public List<ErroRET> validar(Object object) {
+	public List<ErroOUT> validar(Object object) {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
 
 		Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object);
 
-		List<ErroRET> erros = new ArrayList<>();
+		List<ErroOUT> erros = new ArrayList<>();
 		
 		if (constraintViolations.size() > 0 ) {
 
 			for (ConstraintViolation<Object> contraints : constraintViolations) {
-				ErroRET erro = new ErroRET(contraints.getPropertyPath().toString(), contraints.getMessage());
+				ErroOUT erro = new ErroOUT(contraints.getPropertyPath().toString(), contraints.getMessage());
 				erros.add(erro);
 			}
 		}

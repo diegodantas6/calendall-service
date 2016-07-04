@@ -1,8 +1,8 @@
-package br.com.calendall.dto;
+package br.com.calendall.dto.in;
 
 import javax.validation.constraints.NotNull;
 
-public class RecuperarSenhaDTO {
+public class RecuperarSenhaIN {
 
 	@NotNull(message="informe o login")
 	private String login;

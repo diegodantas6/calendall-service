@@ -1,8 +1,8 @@
-package br.com.calendall.dto;
+package br.com.calendall.dto.in;
 
 import javax.validation.constraints.NotNull;
 
-public class LoginDTO {
+public class LoginIN {
 
 	@NotNull(message = "Login deve ser informado")
 	private String login;
@@ -18,11 +18,11 @@ public class LoginDTO {
 		return senha;
 	}
 
-	public LoginDTO() {
+	public LoginIN() {
 		super();
 	}
 
-	public LoginDTO(String login, String senha) {
+	public LoginIN(String login, String senha) {
 		super();
 		this.login = login;
 		this.senha = senha;

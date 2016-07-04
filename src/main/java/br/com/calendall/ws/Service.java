@@ -9,12 +9,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import br.com.calendall.business.UsuarioBusiness;
-import br.com.calendall.dto.AlterarSenhaDTO;
-import br.com.calendall.dto.CadastroUsuarioDTO;
-import br.com.calendall.dto.LoginDTO;
-import br.com.calendall.dto.RecuperarSenhaDTO;
-import br.com.calendall.dto.ret.CadastroUsuarioRET;
-import br.com.calendall.dto.ret.RetornoRET;
+import br.com.calendall.dto.in.AlterarSenhaIN;
+import br.com.calendall.dto.in.CadastroUsuarioIN;
+import br.com.calendall.dto.in.LoginIN;
+import br.com.calendall.dto.in.RecuperarSenhaIN;
+import br.com.calendall.dto.out.CadastroUsuarioOUT;
+import br.com.calendall.dto.out.RetornoOUT;
 
 @Stateless
 @Path("service")
@@ -27,31 +27,31 @@ public class Service {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean login(LoginDTO dto) {
-		return usuarioBusiness.login(dto);
+	public boolean login(LoginIN in) {
+		return usuarioBusiness.login(in);
 	}
 
 	@POST
 	@Path("/recuperar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean recuperarSenha(RecuperarSenhaDTO dto) {
-		return usuarioBusiness.recuperarSenha(dto);
+	public boolean recuperarSenha(RecuperarSenhaIN in) {
+		return usuarioBusiness.recuperarSenha(in);
 	}
 
 	@POST
 	@Path("/alterar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public RetornoRET alterarSenha(AlterarSenhaDTO dto) {
-		return usuarioBusiness.alterarSenha(dto);
+	public RetornoOUT alterarSenha(AlterarSenhaIN in) {
+		return usuarioBusiness.alterarSenha(in);
 	}
 
 	@POST
 	@Path("/cadastro_usuairo")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public CadastroUsuarioRET cadastroUsuario(CadastroUsuarioDTO dto) {
-		return usuarioBusiness.cadastroUsuario(dto);
+	public CadastroUsuarioOUT cadastroUsuario(CadastroUsuarioIN in) {
+		return usuarioBusiness.cadastroUsuario(in);
 	}
 }
