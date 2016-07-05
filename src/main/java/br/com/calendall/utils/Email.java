@@ -19,17 +19,15 @@ public class Email {
 
 	public boolean enviaEmail(String emailTo, String nomeTo, String assunto, String corpo) {
 		try {
-			String nomeFrom = "Copa";
-			String emailFrom = "copasdoscampeoes@gmail.com";
-			String senha = "copa2016";
+			String nomeFrom = "Calendall";
+			String emailFrom = "voce@calendall.com.br";
+			String senha = "voce1234";
 			
 			Properties props = new Properties();
-			props.put("mail.smtp.host", "smtp.gmail.com");
-			//props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.host", "mail.menuber.com.br");
 			props.put("mail.smtp.socketFactory.port", "587");
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
-			//props.put("mail.smtp.port", "465");
 			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.starttls.enable", "true");
 
