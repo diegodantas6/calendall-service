@@ -1,5 +1,7 @@
 package br.com.calendall.ws;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -8,13 +10,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.calendall.business.AtividadeBusiness;
 import br.com.calendall.business.UsuarioBusiness;
 import br.com.calendall.dto.in.AlterarSenhaIN;
 import br.com.calendall.dto.in.CadastroUsuarioIN;
+import br.com.calendall.dto.in.DadoAtividadeIN;
 import br.com.calendall.dto.in.LoginIN;
 import br.com.calendall.dto.in.RecuperarSenhaIN;
+import br.com.calendall.dto.in.UsuarioAtividadeIN;
 import br.com.calendall.dto.out.CadastroUsuarioOUT;
+import br.com.calendall.dto.out.LoginOUT;
 import br.com.calendall.dto.out.RetornoOUT;
+import br.com.calendall.dto.out.UsuarioAtividadeOUT;
+import br.com.calendall.model.Atividade;
 
 @Stateless
 @Path("service")
@@ -23,11 +31,14 @@ public class Service {
 	@EJB
 	private UsuarioBusiness usuarioBusiness;
 
+	@EJB
+	private AtividadeBusiness atividadeBusiness;
+
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean login(LoginIN in) {
+	public LoginOUT login(LoginIN in) {
 		return usuarioBusiness.login(in);
 	}
 
@@ -35,7 +46,7 @@ public class Service {
 	@Path("/recuperar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean recuperarSenha(RecuperarSenhaIN in) {
+	public RetornoOUT recuperarSenha(RecuperarSenhaIN in) {
 		return usuarioBusiness.recuperarSenha(in);
 	}
 
@@ -53,5 +64,28 @@ public class Service {
 	@Produces(MediaType.APPLICATION_JSON)
 	public CadastroUsuarioOUT cadastroUsuario(CadastroUsuarioIN in) {
 		return usuarioBusiness.cadastroUsuario(in);
+	}
+
+	@POST
+	@Path("/atividades")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Atividade> atividades() {
+		return atividadeBusiness.atividades();
+	}
+
+	@POST
+	@Path("/usuario_atividades")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UsuarioAtividadeOUT> usuarioAtividades(UsuarioAtividadeIN in) {
+		return atividadeBusiness.usuarioAtividades(in);
+	}
+
+	@POST
+	@Path("/dado_atividades")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RetornoOUT dadoAtividades(List<DadoAtividadeIN> in) {
+		return atividadeBusiness.dadoAtividades(in);
 	}
 }

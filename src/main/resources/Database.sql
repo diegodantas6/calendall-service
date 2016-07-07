@@ -17,14 +17,13 @@ CREATE TABLE IF NOT EXISTS dados_pro (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuario (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  login VARCHAR(20) NOT NULL,
+  email VARCHAR(60) NOT NULL,
   senha VARCHAR(20) NOT NULL,
   tipo CHAR(1) NOT NULL comment 'P = profissional / C = cliente',
   nome VARCHAR(45) NOT NULL,
   cpf VARCHAR(11) NULL,
   foto LONGBLOB NULL,
   celular VARCHAR(11) NULL,
-  email VARCHAR(60) NULL,
   situacao CHAR(1) NOT NULL comment 'A = ativo / B = bloqueado',
   dados_pro_id BIGINT NULL,
   INDEX fk_usuario_dados_pro_idx (dados_pro_id ASC),

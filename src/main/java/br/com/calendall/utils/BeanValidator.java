@@ -33,4 +33,26 @@ public class BeanValidator {
 		
 		return erros;
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public List<ErroOUT> validarList(List objects) {
+		List<ErroOUT> erros = new ArrayList<>();
+		
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+
+		for (Object object : objects) {
+			Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object);
+			
+			if (constraintViolations.size() > 0 ) {
+
+				for (ConstraintViolation<Object> contraints : constraintViolations) {
+					ErroOUT erro = new ErroOUT(contraints.getPropertyPath().toString(), contraints.getMessage());
+					erros.add(erro);
+				}
+			}
+		}
+		
+		return erros;
+	}
 }

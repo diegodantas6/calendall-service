@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "login", query = "select u from Usuario u where u.login = :login and u.senha = :senha and u.situacao = 'A'"),
-	@NamedQuery(name = "recuperar_senha", query = "select u from Usuario u where u.login = :login and u.situacao = 'A'")
+	@NamedQuery(name = "login", query = "select u from Usuario u where u.email = :email and u.senha = :senha and u.situacao = 'A'"),
+	@NamedQuery(name = "recuperar_senha", query = "select u from Usuario u where u.email = :email and u.situacao = 'A'")
 })
 @Table(name = "usuario")
 public class Usuario implements Serializable {
@@ -27,9 +27,6 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "login")
-	private String login;
 
 	@Column(name = "senha")
 	private String senha;
@@ -65,14 +62,6 @@ public class Usuario implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getSenha() {

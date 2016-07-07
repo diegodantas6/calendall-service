@@ -14,6 +14,7 @@ import br.com.calendall.dto.in.LoginIN;
 import br.com.calendall.dto.in.RecuperarSenhaIN;
 import br.com.calendall.dto.out.CadastroUsuarioOUT;
 import br.com.calendall.dto.out.ErroOUT;
+import br.com.calendall.dto.out.LoginOUT;
 import br.com.calendall.dto.out.RetornoOUT;
 import br.com.calendall.enums.SituacaoUsuario;
 import br.com.calendall.model.Usuario;
@@ -32,30 +33,49 @@ public class UsuarioBusiness {
 	@EJB
 	private Email email;
 
-	public boolean login(LoginIN in) {
+	public boolean loginFilter(LoginIN in) {
 		TypedQuery<Usuario> query = entityManager.createNamedQuery("login", Usuario.class);
-		query.setParameter("login", in.getLogin());
+		query.setParameter("email", in.getEmail());
 		query.setParameter("senha", in.getSenha());
 
 		try {
 			query.getSingleResult();
-
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
-	public boolean recuperarSenha(RecuperarSenhaIN in) {
+	public LoginOUT login(LoginIN in) {
+		TypedQuery<Usuario> query = entityManager.createNamedQuery("login", Usuario.class);
+		query.setParameter("email", in.getEmail());
+		query.setParameter("senha", in.getSenha());
+
+		try {
+			Usuario usuario = query.getSingleResult();
+
+			return new LoginOUT(usuario.getId(), usuario.getNome());
+		} catch (Exception e) {
+			return new LoginOUT(e);
+		}
+	}
+
+	public RetornoOUT recuperarSenha(RecuperarSenhaIN in) {
 		try {
 			TypedQuery<Usuario> query = entityManager.createNamedQuery("recuperar_senha", Usuario.class);
-			query.setParameter("login", in.getLogin());
+			query.setParameter("email", in.getEmail());
 
-			//Usuario usuario = query.getSingleResult();
+			Usuario usuario = query.getSingleResult();
 
-			 return email.enviaEmail("diegodantas6@gmail.com", "D2", "teste", "asd<br>asd<li>asd");
+			boolean enviado = email.enviaEmail(usuario.getEmail(), usuario.getNome(), "recuperarSenha", "asd<br>asd<br>asd");
+
+			if (enviado) {
+				return new RetornoOUT();
+			} else {
+				return new RetornoOUT(false);
+			}
 		} catch (Exception e) {
-			return false;
+			return new RetornoOUT(e);
 		}
 	}
 
@@ -89,8 +109,8 @@ public class UsuarioBusiness {
 				Usuario usuario = new Usuario();
 
 				usuario.setNome(in.getNome());
+				usuario.setEmail(in.getEmail());
 				usuario.setSenha(in.getSenha());
-				usuario.setLogin(in.getLogin());
 				usuario.setTipo(in.getTipo());
 				usuario.setSituacao(SituacaoUsuario.ATIVO.getSittuacao());
 

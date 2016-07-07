@@ -4,11 +4,11 @@ import javax.validation.constraints.NotNull;
 
 public class RecuperarSenhaIN {
 
-	@NotNull(message="informe o login")
-	private String login;
-	
-	public String getLogin() {
-		return login;
+	@NotNull(message="informe o email")
+	private String email;
+
+	public String getEmail() {
+		return email;
 	}
 	
 }

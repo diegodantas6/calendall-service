@@ -4,14 +4,14 @@ import javax.validation.constraints.NotNull;
 
 public class LoginIN {
 
-	@NotNull(message = "Login deve ser informado")
-	private String login;
+	@NotNull(message = "Email deve ser informado")
+	private String email;
 	
 	@NotNull(message = "Senha deve ser informada")
 	private String senha;
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 	
 	public String getSenha() {
@@ -22,9 +22,9 @@ public class LoginIN {
 		super();
 	}
 
-	public LoginIN(String login, String senha) {
+	public LoginIN(String email, String senha) {
 		super();
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
 	}
 }

@@ -20,6 +20,11 @@ public class RetornoOUT {
 		this.ok = true;
 	}
 
+	public RetornoOUT(boolean ok) {
+		super();
+		this.ok = ok;
+	}
+
 	public RetornoOUT(List<ErroOUT> erros) {
 		super();
 		this.ok = false;

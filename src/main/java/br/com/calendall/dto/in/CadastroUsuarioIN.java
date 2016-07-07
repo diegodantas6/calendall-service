@@ -8,13 +8,8 @@ public class CadastroUsuarioIN {
 	@NotNull(message="Nome deve ser informado")
 	private String nome;
 
-	@Size(
-	    min = 6,
-	    max = 20,
-	    message = "A senha deve conter entre {min} e {max} caracteres"
-	)
-	@NotNull(message="Login deve ser informado")
-	private String login;
+	@NotNull(message="Email deve ser informado")
+	private String email;
 
 	@Size(
 	    min = 6,
@@ -31,10 +26,10 @@ public class CadastroUsuarioIN {
 		return nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
-
+	
 	public String getSenha() {
 		return senha;
 	}

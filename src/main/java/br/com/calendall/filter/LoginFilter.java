@@ -32,12 +32,12 @@ public class LoginFilter implements ContainerRequestFilter {
 
 		if (!(servico.equals(LOGIN) || servico.equals(CADASTRO_USUAIRO) || servico.equals(RECUPERAR_SENHA)
 				|| servico.equals(ALTERAR_SENHA))) {
-			String login = requestContext.getHeaderString("user");
+			String email = requestContext.getHeaderString("user");
 			String senha = requestContext.getHeaderString("pass");
 
-			LoginIN dto = new LoginIN(login, senha);
+			LoginIN dto = new LoginIN(email, senha);
 
-			if (!(usuarioBusiness.login(dto))) {
+			if (!(usuarioBusiness.loginFilter(dto))) {
 				requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
 						.entity("User cannot access the resource.").build());
 			}
