@@ -3,10 +3,10 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS dados_pro (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  tipo_pagamento CHAR(1) NOT NULL comment 'B = boleto / C = cartao',
+  tipo_pagamento CHAR(1) NULL comment 'B = boleto / C = cartao',
   tipo_atendimento CHAR(1) NOT NULL comment 'R = residencia / L = local proprio / A = ambos',
   tempo_entre_agendas INT NOT NULL,
-  cep VARCHAR(8) NOT NULL,
+  cep VARCHAR(9) NOT NULL,
   numero INT NOT NULL,
   complemento VARCHAR(60) NOT NULL,
   PRIMARY KEY (id))
@@ -18,12 +18,12 @@ CREATE TABLE IF NOT EXISTS dados_pro (
 CREATE TABLE IF NOT EXISTS usuario (
   id BIGINT NOT NULL AUTO_INCREMENT,
   email VARCHAR(60) NOT NULL,
-  senha VARCHAR(20) NOT NULL,
+  senha VARCHAR(30) NOT NULL,
   tipo CHAR(1) NOT NULL comment 'P = profissional / C = cliente',
   nome VARCHAR(45) NOT NULL,
-  cpf VARCHAR(11) NULL,
+  cpf VARCHAR(14) NULL,
   foto LONGBLOB NULL,
-  celular VARCHAR(11) NULL,
+  celular VARCHAR(14) NULL,
   situacao CHAR(1) NOT NULL comment 'A = ativo / B = bloqueado',
   dados_pro_id BIGINT NULL,
   INDEX fk_usuario_dados_pro_idx (dados_pro_id ASC),
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 	REFERENCES dados_pro (id)
 	ON DELETE NO ACTION
 	ON UPDATE NO ACTION,
-  UNIQUE INDEX login_UNIQUE (login ASC),
+  UNIQUE INDEX email_UNIQUE (email ASC),
   UNIQUE INDEX cpf_UNIQUE (cpf ASC))
 ;
 

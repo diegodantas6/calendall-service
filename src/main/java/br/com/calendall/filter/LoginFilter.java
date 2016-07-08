@@ -19,7 +19,7 @@ public class LoginFilter implements ContainerRequestFilter {
 	 */
 	private static final String LOGIN = "/service/login";
 	private static final String ALTERAR_SENHA = "/service/alterar_senha";
-	private static final String CADASTRO_USUAIRO = "/service/cadastro_usuairo";
+	private static final String CADASTRO_USUARIO = "/service/cadastro_usuario";
 	private static final String RECUPERAR_SENHA = "/service/recuperar_senha";
 
 	@EJB
@@ -30,7 +30,7 @@ public class LoginFilter implements ContainerRequestFilter {
 
 		String servico = requestContext.getUriInfo().getPath();
 
-		if (!(servico.equals(LOGIN) || servico.equals(CADASTRO_USUAIRO) || servico.equals(RECUPERAR_SENHA)
+		if (!(servico.equals(LOGIN) || servico.equals(CADASTRO_USUARIO) || servico.equals(RECUPERAR_SENHA)
 				|| servico.equals(ALTERAR_SENHA))) {
 			String email = requestContext.getHeaderString("user");
 			String senha = requestContext.getHeaderString("pass");

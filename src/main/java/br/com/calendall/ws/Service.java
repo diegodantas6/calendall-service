@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import br.com.calendall.business.AtividadeBusiness;
 import br.com.calendall.business.UsuarioBusiness;
 import br.com.calendall.dto.in.AlterarSenhaIN;
+import br.com.calendall.dto.in.CadastroUsuarioEnderecoIN;
 import br.com.calendall.dto.in.CadastroUsuarioIN;
 import br.com.calendall.dto.in.DadoAtividadeIN;
 import br.com.calendall.dto.in.LoginIN;
@@ -59,11 +60,19 @@ public class Service {
 	}
 
 	@POST
-	@Path("/cadastro_usuairo")
+	@Path("/cadastro_usuario")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public CadastroUsuarioOUT cadastroUsuario(CadastroUsuarioIN in) {
 		return usuarioBusiness.cadastroUsuario(in);
+	}
+
+	@POST
+	@Path("/cadastro_usuario_endereco")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RetornoOUT cadastroUsuarioEndereco(CadastroUsuarioEnderecoIN in) {
+		return usuarioBusiness.cadastroUsuarioEndereco(in);
 	}
 
 	@POST
