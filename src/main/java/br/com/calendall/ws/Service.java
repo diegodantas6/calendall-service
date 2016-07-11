@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import br.com.calendall.business.AtividadeBusiness;
 import br.com.calendall.business.UsuarioBusiness;
 import br.com.calendall.dto.in.AlterarSenhaIN;
+import br.com.calendall.dto.in.CadastroCartaoIN;
+import br.com.calendall.dto.in.CadastroFormaPagamentoIN;
 import br.com.calendall.dto.in.CadastroUsuarioEnderecoIN;
 import br.com.calendall.dto.in.CadastroUsuarioIN;
 import br.com.calendall.dto.in.DadoAtividadeIN;
@@ -51,6 +53,17 @@ public class Service {
 		return usuarioBusiness.recuperarSenha(in);
 	}
 
+//	@POST
+//	@Path("/recuperar_senha/{id}")
+//	@Produces(MediaType.TEXT_HTML)
+//	public String recuperarSenhaForm(@PathParam("id") Long id) {
+//		StringBuilder html = new StringBuilder();
+//		
+//		html.append("<h1>Teste</h1>");
+//		
+//		return html.toString();
+//	}
+
 	@POST
 	@Path("/alterar_senha")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -73,6 +86,22 @@ public class Service {
 	@Produces(MediaType.APPLICATION_JSON)
 	public RetornoOUT cadastroUsuarioEndereco(CadastroUsuarioEnderecoIN in) {
 		return usuarioBusiness.cadastroUsuarioEndereco(in);
+	}
+
+	@POST
+	@Path("/cadastro_forma_pagamento")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RetornoOUT cadastroFormaPagamento(CadastroFormaPagamentoIN in) {
+		return usuarioBusiness.cadastroFormaPagamento(in);
+	}
+
+	@POST
+	@Path("/cadastro_usuario_cartao")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public RetornoOUT cadastroUsuarioCartao(CadastroCartaoIN in) {
+		return usuarioBusiness.cadastroUsuarioCartao(in);
 	}
 
 	@POST

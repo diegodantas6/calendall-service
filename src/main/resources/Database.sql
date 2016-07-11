@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS usuario_atividade (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS dados_cartao (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  numero CHAR(16) NOT NULL,
+  numero CHAR(19) NOT NULL,
   cvv CHAR(3) NOT NULL,
   mes INT NOT NULL,
   ano INT NOT NULL,
