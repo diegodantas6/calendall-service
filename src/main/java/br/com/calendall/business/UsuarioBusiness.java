@@ -54,14 +54,25 @@ public class UsuarioBusiness {
 	}
 
 	public LoginOUT login(LoginIN in) {
-		TypedQuery<Usuario> query = entityManager.createNamedQuery("login", Usuario.class);
-		query.setParameter("email", in.getEmail());
-		query.setParameter("senha", in.getSenha());
-
 		try {
-			Usuario usuario = query.getSingleResult();
+			List<ErroOUT> erros = beanValidator.validar(in);
+			
+			if (!(email.isEmailValid(in.getEmail()))) {
+				ErroOUT erroOUT = new ErroOUT("email", "Email invalido!");
+				erros.add(erroOUT);
+			}
 
-			return new LoginOUT(usuario.getId(), usuario.getNome());
+			if (erros.size() > 0) {
+				return new LoginOUT(erros);
+			} else {
+				TypedQuery<Usuario> query = entityManager.createNamedQuery("login", Usuario.class);
+				query.setParameter("email", in.getEmail());
+				query.setParameter("senha", in.getSenha());
+
+				Usuario usuario = query.getSingleResult();
+
+				return new LoginOUT(usuario.getId(), usuario.getNome());
+			}
 		} catch (Exception e) {
 			return new LoginOUT(e);
 		}
@@ -251,7 +262,7 @@ public class UsuarioBusiness {
 			} else {
 
 				Usuario usuario = entityManager.find(Usuario.class, in.getId());
-				
+
 				DadosCartao cartao = new DadosCartao();
 				cartao.setNumero(in.getNumero());
 				cartao.setNome(in.getNome());
@@ -261,7 +272,7 @@ public class UsuarioBusiness {
 				cartao.setProfissional(usuario);
 				cartao.setSituacao("A");
 				cartao.setBandeira(1);
-				
+
 				entityManager.persist(cartao);
 
 				return new RetornoOUT();
